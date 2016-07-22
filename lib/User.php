@@ -30,20 +30,105 @@ class User {
         return Request::post($endpoint, $data);
     }
 
-    public static function update() {
+    /**
+     * @param $user_id
+     * @param null $email
+     * @param null $password
+     * @param null $firstname
+     * @param null $lastname
+     * @param null $role_id
+     * @return Response
+     * @throws Exception
+     */
+    public static function update($user_id, $email = null, $password = null, $firstname = null, $lastname = null, $role_id = null) {
         $endpoint = "admin/api_account/update";
+
+        if(empty($user_id)) {
+            throw new Exception("#101 User_id is required.");
+        }
+
+        $data = array(
+            "user_id" => $user_id,
+        );
+
+        if(!is_null($email)) {
+            $data["email"] = $email;
+        }
+
+        if(!is_null($password)) {
+            $data["password"] = $password;
+        }
+
+        if(!is_null($firstname)) {
+            $data["firstname"] = $firstname;
+        }
+
+        if(!is_null($lastname)) {
+            $data["lastname"] = $lastname;
+        }
+
+        if(!is_null($role_id)) {
+            $data["role_id"] = $role_id;
+        }
+
+        return Request::post($endpoint, $data);
     }
 
-    public static function exist() {
+    /**
+     * @param $email
+     * @return Response
+     * @throws Exception
+     */
+    public static function exist($email) {
         $endpoint = "admin/api_account/exists";
+
+        if(empty($email)) {
+            throw new Exception("#102 E-mail is required.");
+        }
+
+        $data = array(
+            "email" => $email,
+        );
+
+        return Request::post($endpoint, $data);
     }
 
-    public static function authenticate() {
+    /**
+     * @param $email
+     * @param $password
+     */
+    public static function authenticate($email, $password) {
         $endpoint = "admin/api_account/authenticate";
+
+        if(empty($email) || empty($password)) {
+            throw new Exception("#103 E-mail & Password are required.");
+        }
+
+        $data = array(
+            "email" => $email,
+            "password" => $password,
+        );
+
+        return Request::post($endpoint, $data);
     }
 
-    public static function forgotpassword() {
+    /**
+     * @param $email
+     * @return Response
+     * @throws Exception
+     */
+    public static function forgotpassword($email) {
         $endpoint = "admin/api_account/forgotpassword";
+
+        if(empty($email)) {
+            throw new Exception("#104 E-mail is required.");
+        }
+
+        $data = array(
+            "email" => $email,
+        );
+
+        return Request::post($endpoint, $data);
     }
 
 }

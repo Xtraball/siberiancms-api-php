@@ -16,8 +16,7 @@ class Request {
 
         # Setting options
         curl_setopt($request, CURLOPT_URL, $url);
-        curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($request, CURLOPT_HEADER, true);
+        curl_setopt($request, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($request, CURLOPT_TIMEOUT, 3);
         curl_setopt($request, CURLOPT_POST, true);
         curl_setopt($request, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
