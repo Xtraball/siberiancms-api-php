@@ -12,6 +12,9 @@ class Request {
         $url = \Siberian\Api::$host.$endpoint;
         $credentials = \Siberian\Api::$username.":".\Siberian\Api::$password;
 
+        # Appending current Api version
+        $data["api_version"] = \Siberian\Api::$version;
+
         $request = curl_init();
 
         # Setting options

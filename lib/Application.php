@@ -94,18 +94,18 @@ class Application {
 
     /**
      * @param $app_id Unique identifier
-     * @param $user_id User identifier
+     * @param $admin_id User identifier
      */
-    public static function grant_user($app_id, $user_id) {
+    public static function grant_user($app_id, $admin_id) {
         $endpoint = "application/api_admin/add";
 
-        if(empty($app_id) || empty($user_id)) {
-            throw new Exception("#302 App_id & User_id are required.");
+        if(empty($app_id) || empty($admin_id)) {
+            throw new Exception("#302 App_id & Admin_id are required.");
         }
 
         $data = array(
             "app_id" => $app_id,
-            "user_id" => $user_id,
+            "admin_id" => $admin_id,
         );
 
         return Request::post($endpoint, $data);
@@ -113,18 +113,18 @@ class Application {
 
     /**
      * @param $app_id Unique identifier
-     * @param $user_id User identifier
+     * @param $admin_id User identifier
      */
-    public static function revoke_user($app_id, $user_id) {
+    public static function revoke_user($app_id, $admin_id) {
         $endpoint = "application/api_admin/remove";
 
-        if(empty($app_id) || empty($user_id)) {
-            throw new Exception("#302 App_id & User_id are required.");
+        if(empty($app_id) || empty($admin_id)) {
+            throw new Exception("#302 App_id & Admin_id are required.");
         }
 
         $data = array(
             "app_id" => $app_id,
-            "user_id" => $user_id,
+            "admin_id" => $admin_id,
         );
 
         return Request::post($endpoint, $data);

@@ -19,6 +19,8 @@ class Api {
      */
     public static $password;
 
+    public static $version = 4.2;
+
     /**
      * @param $host
      * @param $username

@@ -77,10 +77,16 @@ class Response {
     }
 
     /**
-     * @return array
+     * @param null $key
+     * @return array|mixed
      */
-    public function getResponse() {
-        return $this->response;
+    public function getResponse($key = null) {
+        $value = $this->response;
+        if(array_key_exists($key, $this->response)) {
+            $value = $this->response[$key];
+        }
+
+        return $value;
     }
 
     /**

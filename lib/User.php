@@ -80,7 +80,7 @@ class User {
      * @throws Exception
      */
     public static function exist($email) {
-        $endpoint = "admin/api_account/exists";
+        $endpoint = "admin/api_account/exist";
 
         if(empty($email)) {
             throw new Exception("#102 E-mail is required.");
