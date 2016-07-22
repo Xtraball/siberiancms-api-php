@@ -8,7 +8,7 @@ $password = "dummy_password";
 
 # Create user
 printf("Creating user \n");
-$create= \Siberian\User::create($email, $password, "Jane", "Dalton");
+$create = \Siberian\User::create($email, $password, "Jane", "Dalton");
 if($create->isSuccess()) {
     printf("Success: %s \n", print_r($create->getResponse(), true));
 
