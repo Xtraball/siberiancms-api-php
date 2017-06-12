@@ -14,7 +14,7 @@ if($create->isSuccess()) {
 
     $user_id = $create->getResponse("user_id");
 } else {
-    throw new Exception(sprintf("Error: %s \n", $response->getErrorMessage()));
+    throw new Exception(sprintf("Error: %s \n", $create->getErrorMessage()));
 }
 
 # Update user
@@ -41,7 +41,7 @@ $authenticate = \Siberian\User::authenticate($email, $password);
 if($authenticate->isSuccess()) {
     printf("Success: %s \n", print_r($authenticate->getResponse(), true));
 } else {
-    throw new Exception(sprintf("Error: %s \n", $exists->getErrorMessage()));
+    throw new Exception(sprintf("Error: %s \n", $authenticate->getErrorMessage()));
 }
 
 # Forgot password
