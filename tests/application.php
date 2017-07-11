@@ -1,6 +1,26 @@
 <?php
 
 # Init API
+$error = false;
+if(!isset($argv[1])) {
+    echo "Siberian API URL is missing \n";
+    $error = true;
+}
+
+if(!isset($argv[2])) {
+    echo "Username is required \n";
+    $error = true;
+}
+
+if(!isset($argv[3])) {
+    echo "Password is required \n";
+    $error = true;
+}
+
+if($error) {
+    die();
+}
+
 \Siberian\Api::init($argv[1], $argv[2], $argv[3]);
 
 if(empty($user_id)) {

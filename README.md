@@ -17,8 +17,8 @@ Create a new user
 ```
 $response = \Siberian\User::create($email, $password, $firstname, $lastname, $role_id);
 if($response->isSuccess()) {
-    $user_id = $create->getResponse("user_id");
-    $token  = $create->getResponse("token");
+    $user_id = $response->getResponse("user_id");
+    $token  = $response->getResponse("token");
 } else {
     echo $response->getErrorMessage();
 }
@@ -29,8 +29,8 @@ Create an application
 ```
 $response = \Siberian\Application::create($name, $user_id);
 if($response->isSuccess()) {
-    $app_id = $create->getResponse("app_id");
-    $app_url  = $create->getResponse("app_url");
+    $app_id = $response->getResponse("app_id");
+    $app_url  = $response->getResponse("app_url");
 } else {
     echo $response->getErrorMessage();
 }

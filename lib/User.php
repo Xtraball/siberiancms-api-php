@@ -15,7 +15,7 @@ class User {
         $endpoint = "admin/api_account/create";
 
         if(empty($email)) {
-            throw new Exception("#100 E-mail is required.");
+            throw new Exception("#00 E-mail is required.");
         }
 
         # Building data

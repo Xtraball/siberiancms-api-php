@@ -6,6 +6,8 @@
     require "./lib/Request.php";
     require "./lib/Response.php";
     require "./lib/User.php";
+    require "./lib/Push.php";
 
     require "./tests/user.php";
     require "./tests/application.php";
+    require "./tests/push.php";

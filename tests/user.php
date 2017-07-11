@@ -1,6 +1,26 @@
 <?php
 
 # Init API
+$error = false;
+if(!isset($argv[1])) {
+    echo "Siberian API URL is missing \n";
+    $error = true;
+}
+
+if(!isset($argv[2])) {
+    echo "Username is required \n";
+    $error = true;
+}
+
+if(!isset($argv[3])) {
+    echo "Password is required \n";
+    $error = true;
+}
+
+if($error) {
+    die();
+}
+
 \Siberian\Api::init($argv[1], $argv[2], $argv[3]);
 
 $email = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10)."@domain.com";
@@ -14,7 +34,7 @@ if($create->isSuccess()) {
 
     $user_id = $create->getResponse("user_id");
 } else {
-    throw new Exception(sprintf("Error: %s \n", $response->getErrorMessage()));
+    throw new Exception(sprintf("Error: %s \n", $create->getErrorMessage()));
 }
 
 # Update user
@@ -41,7 +61,7 @@ $authenticate = \Siberian\User::authenticate($email, $password);
 if($authenticate->isSuccess()) {
     printf("Success: %s \n", print_r($authenticate->getResponse(), true));
 } else {
-    throw new Exception(sprintf("Error: %s \n", $exists->getErrorMessage()));
+    throw new Exception(sprintf("Error: %s \n", $authenticate->getErrorMessage()));
 }
 
 # Forgot password
@@ -50,5 +70,5 @@ $forgotpassword = \Siberian\User::forgotpassword($email);
 if($forgotpassword->isSuccess()) {
     printf("Success: %s \n", print_r($forgotpassword->getResponse(), true));
 } else {
-    throw new Exception(sprintf("Error: %s \n", $exists->getErrorMessage()));
+    throw new Exception(sprintf("Error: %s \n", $forgotpassword->getErrorMessage()));
 }
