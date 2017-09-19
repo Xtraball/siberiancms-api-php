@@ -49,7 +49,7 @@ class Response {
      */
     public function __construct($status_code, $response) {
         if(!in_array($status_code, $this->http_codes)) {
-            throw new \Exception("#200 An error occured with the request.");
+            throw new \Exception("#200 An error occured with the request, {$status_code}.");
         }
 
         $this->raw_response = $response;
