@@ -35,10 +35,11 @@ class Push {
      * @param string $devices
      * @param bool $open_url
      * @param null $url
+     * @param bool $dry_run
      * @return Response
      */
     public static function send($title, $message, $checked = [], $send_to_all = false, $devices = 'all',
-                                $open_url = false, $url = null) {
+                                $open_url = false, $url = null, $dry_run = false) {
         $endpoint = 'push/api_global/send';
 
         if(empty($title) || empty($message)) {
@@ -62,6 +63,7 @@ class Push {
             'devices' => $devices,
             'open_url' => $open_url,
             'url' => $url,
+            'dry_run' => $dry_run,
         ];
 
         return Request::post($endpoint, $data);

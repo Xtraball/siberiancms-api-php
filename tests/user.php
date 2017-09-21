@@ -64,11 +64,16 @@ if($authenticate->isSuccess()) {
     throw new Exception(sprintf("Error: %s \n", $authenticate->getErrorMessage()));
 }
 
-# Forgot password
-printf("Forgot password \n");
-$forgotpassword = \Siberian\User::forgotpassword($email);
-if($forgotpassword->isSuccess()) {
-    printf("Success: %s \n", print_r($forgotpassword->getResponse(), true));
-} else {
-    throw new Exception(sprintf("Error: %s \n", $forgotpassword->getErrorMessage()));
+# Forgot password, this action can fail non-linked to the API (SMTP, Mail, etc ...)
+try {
+    printf("Forgot password \n");
+    $forgotpassword = \Siberian\User::forgotpassword($email);
+    if($forgotpassword->isSuccess()) {
+        printf("Success: %s \n", print_r($forgotpassword->getResponse(), true));
+    } else {
+        throw new Exception(sprintf("Error: %s \n", $forgotpassword->getErrorMessage()));
+    }
+} catch (Exception $e) {
+    printf("Error: %s \n", $e->getMessage());
 }
+
