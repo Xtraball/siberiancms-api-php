@@ -6,13 +6,20 @@ You can refer to the developers documentation for available methods and paramete
 
 ## Basic usage
 
-Init the API with 
+#### Init the API with Basic Auth or Bearer token
 
 ```php
+
+// Init with Basic Auth username/password
 \Siberian\Api::init($domain, $username, $password);
+
+// OR
+
+// Init with Bearer token
+\Siberian\Api::initWithBearer($domain, $bearerToken);
 ```
 
-Create a new user
+#### Create a new user
 
 ```
 $response = \Siberian\User::create($email, $password, $firstname, $lastname, $role_id);
@@ -24,7 +31,7 @@ if($response->isSuccess()) {
 }
 ```
 
-Create an application
+#### Create an application
 
 ```
 $response = \Siberian\Application::create($name, $user_id);
@@ -34,4 +41,21 @@ if($response->isSuccess()) {
 } else {
     echo $response->getErrorMessage();
 }
+```
+
+Other actionss are documented here [API Documentation](http://developer.siberiancms.com/api/)
+
+
+#### Run test (on you development instance)
+
+Basic Auth
+
+```
+./run-test.sh siberianurl basic username password
+```
+
+Bearer token
+
+```
+./run-test.sh siberianurl bearer token
 ```

@@ -13,6 +13,9 @@
     require "./lib/Push.php";
     require "./lib/Backoffice.php";
 
+    // API init
+    require "./tests/init.php";
+
     require "./tests/user.php";
     require "./tests/application.php";
     require "./tests/backoffice.php";

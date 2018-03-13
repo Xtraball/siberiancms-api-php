@@ -5,7 +5,7 @@ namespace Siberian;
 class User {
 
     /**
-     * @param $email Required
+     * @param string $email
      * @param $password
      * @param $firstname
      * @param $lastname

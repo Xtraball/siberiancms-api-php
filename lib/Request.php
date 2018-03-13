@@ -10,7 +10,6 @@ class Request {
      */
     public static function post($endpoint, $data) {
         $url = \Siberian\Api::$host.$endpoint;
-        $credentials = \Siberian\Api::$username.":".\Siberian\Api::$password;
 
         # Appending current Api version
         $data["api_version"] = \Siberian\Api::$version;
@@ -22,8 +21,19 @@ class Request {
         curl_setopt($request, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($request, CURLOPT_TIMEOUT, 3);
         curl_setopt($request, CURLOPT_POST, true);
-        curl_setopt($request, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        curl_setopt($request, CURLOPT_USERPWD, $credentials);
+        switch (\Siberian\Api::$authType) {
+            case 'basic':
+                    $credentials = \Siberian\Api::$username . ":" . \Siberian\Api::$password;
+                    curl_setopt($request, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+                    curl_setopt($request, CURLOPT_USERPWD, $credentials);
+                break;
+            case 'bearer':
+                    $bearerToken = \Siberian\Api::$bearerToken;
+                    curl_setopt($request, CURLOPT_HTTPHEADER, [
+                        'Api-Auth-Bearer: Bearer ' . $bearerToken
+                    ]);
+                break;
+        }
 
         # Query string
         $query_string = http_build_query($data);
