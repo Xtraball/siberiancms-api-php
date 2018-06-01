@@ -43,7 +43,7 @@ if($response->isSuccess()) {
 }
 ```
 
-Other actionss are documented here [API Documentation](http://developer.siberiancms.com/api/)
+Other actions are documented here [API Documentation](http://developer.siberiancms.com/api/)
 
 
 #### Run test (on you development instance)
