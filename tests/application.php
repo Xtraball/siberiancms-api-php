@@ -14,7 +14,7 @@ if ($create_app->isSuccess()) {
 
     $app_id = $create_app->getResponse("app_id");
 } else {
-    throw new Exception(sprintf("Error: %s \n", $create_app->getErrorMessage()));
+    throw new \Exception(sprintf("Error: %s \n", $create_app->getErrorMessage()));
 }
 
 if (empty($app_id)) {
@@ -30,7 +30,7 @@ $update_app = \Siberian\Application::update($app_id, $new_name, $new_key);
 if ($update_app->isSuccess()) {
     printf("Success: %s \n", print_r($update_app->getResponse(), true));
 } else {
-    throw new Exception(sprintf("Error: %s \n", $update_app->getErrorMessage()));
+    throw new \Exception(sprintf("Error: %s \n", $update_app->getErrorMessage()));
 }
 
 # Grant user
@@ -39,7 +39,7 @@ $grant_user = \Siberian\Application::grant_user($app_id, $user_id);
 if ($grant_user->isSuccess()) {
     printf("Success: %s \n", print_r($grant_user->getResponse(), true));
 } else {
-    throw new Exception(sprintf("Error: %s \n", $grant_user->getErrorMessage()));
+    throw new \Exception(sprintf("Error: %s \n", $grant_user->getErrorMessage()));
 }
 
 # Revoke user
@@ -48,5 +48,5 @@ $revoke_user = \Siberian\Application::revoke_user($app_id, $user_id);
 if ($revoke_user->isSuccess()) {
     printf("Success: %s \n", print_r($revoke_user->getResponse(), true));
 } else {
-    throw new Exception(sprintf("Error: %s \n", $revoke_user->getErrorMessage()));
+    throw new \Exception(sprintf("Error: %s \n", $revoke_user->getErrorMessage()));
 }

@@ -2,8 +2,12 @@
 
 namespace Siberian;
 
-class Response {
-
+/**
+ * Class Response
+ * @package Siberian
+ */
+class Response
+{
     /**
      * @var Integer success
      */
@@ -15,12 +19,13 @@ class Response {
     const STATUS_ERROR = 2;
 
     /**
-     * @var Array
+     * @var array
      */
-    public $http_codes = array(
+    public $http_codes = [
+        100,
         200,
         400,
-    );
+    ];
 
     /**
      * @var Integer
@@ -35,7 +40,7 @@ class Response {
     /**
      * @var array json decoded to array
      */
-    public $response = array();
+    public $response = [];
 
     /**
      * @var null|string
@@ -46,33 +51,37 @@ class Response {
      * Response constructor.
      * @param $status_code
      * @param $response
+     * @throws \Exception
      */
-    public function __construct($status_code, $response) {
-        if(!in_array($status_code, $this->http_codes)) {
+    public function __construct($status_code, $response)
+    {
+        if (!in_array($status_code, $this->http_codes)) {
             throw new \Exception("#200 An error occured with the request, {$status_code}.");
         }
 
         $this->raw_response = $response;
 
-        $result = json_decode( $this->raw_response, true);
-        if($result === null) {
+        $result = json_decode($this->raw_response, true);
+        if ($result === null) {
             throw new \Exception("#201 An error occurred while decoding result.");
         } else {
             $this->response = $result;
         }
 
-        if(array_key_exists("success", $result)) {
+        if (array_key_exists("success", $result)) {
             $this->status = self::STATUS_SUCCESS;
-        } elseif(array_key_exists("error", $result)) {
+        } elseif (array_key_exists("error", $result)) {
             $this->status = self::STATUS_ERROR;
-            $this->error_message = (array_key_exists("message", $result)) ? $result["message"] : "#203 Undefined error.";
+            $this->error_message = (array_key_exists("message", $result)) ?
+                $result["message"] : "#203 Undefined error.";
         }
     }
 
     /**
      * @return bool
      */
-    public function isSuccess() {
+    public function isSuccess()
+    {
         return ($this->status == self::STATUS_SUCCESS);
     }
 
@@ -80,9 +89,10 @@ class Response {
      * @param null $key
      * @return array|mixed
      */
-    public function getResponse($key = null) {
+    public function getResponse($key = null)
+    {
         $value = $this->response;
-        if(array_key_exists($key, $this->response)) {
+        if (array_key_exists($key, $this->response)) {
             $value = $this->response[$key];
         }
 
@@ -92,14 +102,16 @@ class Response {
     /**
      * @return String
      */
-    public function getRawResponse() {
+    public function getRawResponse()
+    {
         return $this->raw_response;
     }
 
     /**
      * @return null|string
      */
-    public function getErrorMessage() {
+    public function getErrorMessage()
+    {
         return $this->error_message;
     }
 }

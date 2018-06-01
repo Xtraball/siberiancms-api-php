@@ -6,8 +6,8 @@ namespace Siberian;
  * Class Api
  * @package Siberian
  */
-class Api {
-
+class Api
+{
     /**
      * @var String Siberian host
      */
@@ -36,7 +36,7 @@ class Api {
     /**
      * @var string
      */
-    public static $version = '4.13.8';
+    public static $version = '4.14.0';
 
     /**
      * @param $host
@@ -44,14 +44,15 @@ class Api {
      * @param $password
      * @throws \Exception
      */
-    public static function init($host, $username, $password) {
+    public static function init($host, $username, $password)
+    {
         # Is a valid endpoint ?
-        if(filter_var($host, FILTER_VALIDATE_URL) === false) {
+        if (filter_var($host, FILTER_VALIDATE_URL) === false) {
             throw new \Exception("#001 Invalid host");
         }
 
         # Credentials
-        if(empty($username) || empty($password)) {
+        if (empty($username) || empty($password)) {
             throw new \Exception("002 Missing credentials");
         }
 
@@ -69,14 +70,15 @@ class Api {
      * @param $bearerToken
      * @throws \Exception
      */
-    public static function initWithBearer($host, $bearerToken) {
+    public static function initWithBearer($host, $bearerToken)
+    {
         // Is a valid endpoint!
         if (filter_var($host, FILTER_VALIDATE_URL) === false) {
             throw new \Exception("#001 Invalid host");
         }
 
         // Credentials!
-        if(empty($bearerToken)) {
+        if (empty($bearerToken)) {
             throw new \Exception("002 Missing credentials");
         }
 

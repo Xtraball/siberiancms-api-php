@@ -11,7 +11,7 @@ if($create->isSuccess()) {
 
     $user_id = $create->getResponse("user_id");
 } else {
-    throw new Exception(sprintf("Error: %s \n", $create->getErrorMessage()));
+    throw new \Exception(sprintf("Error: %s \n", $create->getErrorMessage()));
 }
 
 # Update user
@@ -20,7 +20,7 @@ $update = \Siberian\User::update($user_id, null, null, "John", "Doe");
 if($update->isSuccess()) {
     printf("Success: %s \n", print_r($update->getResponse(), true));
 } else {
-    throw new Exception(sprintf("Error: %s \n", $update->getErrorMessage()));
+    throw new \Exception(sprintf("Error: %s \n", $update->getErrorMessage()));
 }
 
 # Exists user
@@ -29,7 +29,7 @@ $exists = \Siberian\User::exist($email);
 if($exists->isSuccess()) {
     printf("Success: %s \n", print_r($exists->getResponse(), true));
 } else {
-    throw new Exception(sprintf("Error: %s \n", $exists->getErrorMessage()));
+    throw new \Exception(sprintf("Error: %s \n", $exists->getErrorMessage()));
 }
 
 # Authenticate user
@@ -38,7 +38,7 @@ $authenticate = \Siberian\User::authenticate($email, $password);
 if($authenticate->isSuccess()) {
     printf("Success: %s \n", print_r($authenticate->getResponse(), true));
 } else {
-    throw new Exception(sprintf("Error: %s \n", $authenticate->getErrorMessage()));
+    throw new \Exception(sprintf("Error: %s \n", $authenticate->getErrorMessage()));
 }
 
 # Forgot password, this action can fail non-linked to the API (SMTP, Mail, etc ...)
@@ -48,7 +48,7 @@ try {
     if($forgotpassword->isSuccess()) {
         printf("Success: %s \n", print_r($forgotpassword->getResponse(), true));
     } else {
-        throw new Exception(sprintf("Error: %s \n", $forgotpassword->getErrorMessage()));
+        throw new \Exception(sprintf("Error: %s \n", $forgotpassword->getErrorMessage()));
     }
 } catch (Exception $e) {
     printf("Error: %s \n", $e->getMessage());
